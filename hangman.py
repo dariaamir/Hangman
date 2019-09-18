@@ -13,7 +13,6 @@ def hangman():
     print()
     words_list = ['python', 'java', 'kotlin', 'javascript']
     word = random.choice(words_list)
-
     num_of_tries = 8
 
     word_start = hide_word(word)
@@ -25,8 +24,6 @@ def hangman():
         if guess in word and guess not in guessed_letters:
             guessed_letters.append(guess)
             word_start = hide_word(word, guessed_letters)
-            if "-" not in word_start:
-                break
             print()
         else:
             print("No such letter in the word\n")
