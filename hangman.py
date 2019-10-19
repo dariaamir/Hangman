@@ -1,7 +1,15 @@
 import random
 
-words_list = ['python', 'java', 'kotlin', 'javascript']
-word = random.choice(words_list)
+
+def initiate_game():
+    print('H A N G M A N')
+    game = input('Type "play" to play the game, "exit" to quit: ')
+    print()
+
+    while game == 'play':
+        hangman_game()
+        game = input('Type "play" to play the game, "exit" to quit: ')
+        print()
 
 
 def hide_word(word_to_hide, list_of_letters):
@@ -10,8 +18,10 @@ def hide_word(word_to_hide, list_of_letters):
             word_to_hide = word_to_hide.replace(letter, "-")
     return word_to_hide
 
+
 def hangman_game():
-    print("H A N G M A N\n")
+    words_list = ['python', 'java', 'kotlin', 'javascript']
+    word = random.choice(words_list)
     num_of_tries = 8
     guessed_letters = []
     all_input_letters = []
@@ -33,25 +43,27 @@ def hangman_game():
             print('You already typed this letter\n')
             continue
 
-        all_input_letters.append(guess)
-
-        if guess in word and guess not in guessed_letters:
-            guessed_letters.append(guess)
-            word_start = hide_word(word, guessed_letters)
-            print()
-            if "-" not in word_start:
-                print(word_start)
-                print("You guessed the word!\n"
-                      "You survived!")
-                break
-
         else:
-            num_of_tries -= 1
-            if num_of_tries == 0:
-                print("No such letter in the word\n"
-                      "You are hanged!")
+
+            all_input_letters.append(guess)
+
+            if guess in word and guess not in guessed_letters:
+                guessed_letters.append(guess)
+                word_start = hide_word(word, guessed_letters)
+                print()
+                if "-" not in word_start:
+                    print(word_start)
+                    print("You guessed the word!\n"
+                          "You survived!\n")
+                    break
+
             else:
-                print("No such letter in the word\n")
+                num_of_tries -= 1
+                if num_of_tries == 0:
+                    print("No such letter in the word\n"
+                          "You are hanged!\n")
+                else:
+                    print("No such letter in the word\n")
 
 
-hangman_game()
+initiate_game()
